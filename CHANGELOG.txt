@@ -1,0 +1,11 @@
+/* $Id$ */
+
+CHANGELOG
+---------
+
+shoutcast.module - March, 24th 2007
+--------------------------------------
+- initial commit.
+
+Comments and suggestions to
+Stefan Auditor <stefan.auditor@erdfisch.de>

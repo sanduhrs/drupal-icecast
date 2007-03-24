@@ -1,0 +1,6 @@
+; $Id $
+name = "Icecast"
+description = "Adds Icecast support to your Website."
+; dependencies = 
+; package = 
+version = "$Name$"

@@ -1,0 +1,14 @@
+/* $Id$ */
+
+INSTALL
+-------
+
+1. Copy the icecast.module to the Drupal modules directory.
+
+2. Go to Administer->Site building->Modules (?q=admin/build/modules), and enable the icecast.module
+
+Comments and suggestions to
+Stefan Auditor <stefan.auditor@erdfisch.de>
+
+Please report any bugs on
+http://drupal.org/project/issues/shoutcast

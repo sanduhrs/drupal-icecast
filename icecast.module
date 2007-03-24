@@ -1,0 +1,16 @@
+<?php
+/* $Id$ */
+
+/**
+ * @file
+ * This module adds icecast support to your Website.
+ * 
+ * Enables your users to create icecast-servers to be a DJ/VJ.
+ * "icecast is free server software for streaming multimedia."
+ * source: http://www.icecast.org/
+ *
+ * @author
+ * Stefan Auditor <stefan.auditor@erdfisch.de>
+ * for erdfisch :: internetlösungen http://erdfisch.de
+ */
+ 
