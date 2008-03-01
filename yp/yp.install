@@ -18,6 +18,7 @@ function yp_schema() {
       'server_subtype'   => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, 'default' => ''),
       'bitrate'          => array('type' => 'varchar', 'length' => 25, 'not null' => TRUE, 'default' => ''),
       'listeners'        => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+      'max_listeners'    => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
       'channels'         => array('type' => 'varchar', 'length' => 25, 'not null' => TRUE, 'default' => ''),
       'samplerate'       => array('type' => 'varchar', 'length' => 25, 'not null' => TRUE, 'default' => ''),
       'last_touch'       => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
