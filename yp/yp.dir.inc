@@ -22,8 +22,9 @@ function theme_yp_dir() {
   //  array('data' => t('Channels'), 'field' => 'channels'),
     array('data' => t('Listeners'), 'field' => 'listeners'), 
     array('data' => t('Current track'), 'field' => 'current_song'), 
+    '',
   );
-  $streams = db_query("SELECT * FROM {yp_stream} WHERE %d - last_touch < 600 ". tablesort_sql($headers), time());
+  $streams = db_query("SELECT * FROM {yp_stream} WHERE %d - last_touch < 300 ". tablesort_sql($headers), time());
   while ($stream = db_fetch_array($streams)) {
     if (strstr($stream['bitrate'], 'Quality')) {
       $stream['bitrate'] = '';
@@ -43,7 +44,6 @@ function theme_yp_dir() {
     if ($stream['samplerate']) {
       $stream['samplerate'] = sprintf("%.0f",$stream['samplerate']/1000) . t('khz');
     }
-    $stream['listeners'] = format_plural($stream['listeners'], '1 listener', '@count listeners');
     if ($stream['server_type'] == 'application/ogg' || $stream['server_type'] == 'Ogg Vorbis') {
       $stream['server_type'] = 'Ogg';
     }
@@ -56,14 +56,16 @@ function theme_yp_dir() {
     } 
     $rows[] = array(
       l($stream['server_name'], $stream['url']),
-      l($stream['server_type'], $stream['listen_url']),
-      l($stream['genre'], $stream['listen_url']),
+      check_plain($stream['server_type']),
+      check_plain($stream['genre']),
       check_plain($stream['description']),
-      l($stream['bitrate'], $stream['listen_url']),
+      check_plain($stream['bitrate']),
     //  l($stream['samplerate'], $stream['listen_url']),
     //  l($stream['channels'], $stream['listen_url']),
-      l($stream['listeners'], $stream['listen_url']),
-      l($stream['current_song'], $stream['listen_url']),
+      $stream['listeners'], // Integer field
+      check_plain($stream['current_song']),
+      l(theme('image', drupal_get_path('module', 'yp') .'/listen.png', t('Listen'), t('Listen')), $stream['listen_url'], array('html' => TRUE))
+      . l(t('Listen'), $stream['listen_url']),
     );
   }
   if (empty($rows)) {

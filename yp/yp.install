@@ -24,6 +24,10 @@ function yp_schema() {
       'last_touch'       => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
     ),
     'primary key' => array('sid'),
+    'indexes' => array(
+      'last_touch' => array('last_touch'),
+      'ip_url' => array('listing_ip', 'listen_url'),
+    ),
   );
   return $schema;
 }

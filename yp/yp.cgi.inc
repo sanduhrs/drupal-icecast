@@ -12,7 +12,7 @@ function yp_map(&$stream = array(), $local, $global, $default = NULL) {
 
 function yp_cgi() {
   if (variable_get('yp_debug', 0)) {
-    watchdog('yp', check_plain(print_r($_POST, TRUE)));
+    watchdog('yp', check_plain(print_r($_POST, TRUE)), NULL, WATCHDOG_DEBUG);
   }
   $action = isset($_POST['action']) ? trim($_POST['action']) : '';
   $stream = array();
@@ -41,17 +41,19 @@ function yp_cgi() {
     $sid = db_last_insert_id('yp_stream', 'sid');
     $yp_response = $sid ? 1 : 0;
     header('SID: '. $sid);
-    header('TouchFreq: 300');
+    header('TouchFreq: 200');
     header('YPMessage: Added');
     header('YPResponse: '. $yp_response);
-    db_query("DELETE FROM {yp_stream} WHERE %d - last_touch > 900", time());
+    db_query("DELETE FROM {yp_stream} WHERE %d - last_touch > 300", time());
     return;
   }
   elseif ($action == 'touch') {
     yp_map($stream, 'sid', 'sid', 0);
-    yp_map($stream, 'current_song', 'st', '');
     yp_map($stream, 'listeners', 'listeners', 0);
-    db_query("UPDATE {yp_stream} SET listeners = %d, current_song = '%s', last_touch = %d WHERE sid = %d", $stream['listeners'], $stream['current_song'], time(), $stream['sid']);
+    yp_map($stream, 'max_listeners', 'max_listeners', 0);
+    yp_map($stream, 'server_subtype', 'stype', '');
+    yp_map($stream, 'current_song', 'st', '');
+    db_query("UPDATE {yp_stream} SET listeners = %d, max_listeners = %d, server_subtype = '%s', current_song = '%s', last_touch = %d WHERE sid = %d", $stream['listeners'], $stream['max_listeners'], $stream['server_subtype'], $stream['current_song'], time(), $stream['sid']);
     if (db_affected_rows()) {
       $yp_response = 1;
       $yp_message = 'Touched';
