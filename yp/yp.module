@@ -6,8 +6,8 @@
  */
 function yp_menu() {
   $items = array();
-  $items['yp/dir'] = array(
-    'title' => 'YP directory',
+  $items['yp'] = array(
+    'title' => 'Stream directory',
     'page callback' => 'yp_dir',
     'access arguments' => array('access content'),
     'type' => MENU_SUGGESTED_ITEM,
