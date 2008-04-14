@@ -4,6 +4,15 @@ The YP module provides a Drupal-based Icecast YP directory, both
 the CGI script to receive YP posts from Icecast servers and a 
 sortable directory display page.
 
+After installing the module, you can submit your Icecast stream(s) 
+to the YP directory by adding the following to your icecast.xml 
+configuration file, where "example.org" is the URL of your Drupal 
+site:
+  <directory>
+    <yp-url-timeout>15</yp-url-timeout>
+    <yp-url>http://example.org/yp/cgi</yp-url>
+  </directory>
+
 More features can and should be added.  Please submit your patches 
 to http://drupal.org/project/icecast -- Thanks!
 
