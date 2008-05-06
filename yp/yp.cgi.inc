@@ -65,10 +65,10 @@ class YPCGIAdd extends YPCGI {
   }
 
   function response() {
-    header("SID: $this->sid");
-    header('TouchFreq: 200');
-    header('YPMessage: $this->yp_message');
-    header("YPResponse: $this->yp_response");
+    drupal_set_header("SID: $this->sid");
+    drupal_set_header('TouchFreq: 200');
+    drupal_set_header("YPMessage: $this->yp_message");
+    drupal_set_header("YPResponse: $this->yp_response");
     db_query("DELETE FROM {yp_stream} WHERE %d - last_touch > 300", time());
   }
 }
@@ -91,8 +91,8 @@ class YPCGITouch extends YPCGI {
   }
 
   function response() {
-    header("YPResponse: $this->yp_response");
-    header("YPMessage: $this->yp_message");
+    drupal_set_header("YPResponse: $this->yp_response");
+    drupal_set_header("YPMessage: $this->yp_message");
   }
 
 }
@@ -108,8 +108,8 @@ class YPCGIRemove extends YPCGI {
   }
 
   function response() {
-    header('YPResponse: 1');
-    header('YPMessage: Removed');
+    drupal_set_header('YPResponse: 1');
+    drupal_set_header('YPMessage: Removed');
   }
 
 }

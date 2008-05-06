@@ -6,8 +6,8 @@ sortable directory display page.
 
 After installing the module, you can submit your Icecast stream(s) 
 to the YP directory by adding the following to your icecast.xml 
-configuration file, where "example.org" is the URL of your Drupal 
-site:
+configuration file, where "http://example.org/" is the URL of your 
+Drupal site:
   <directory>
     <yp-url-timeout>15</yp-url-timeout>
     <yp-url>http://example.org/yp/cgi</yp-url>
