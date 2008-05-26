@@ -1,7 +1,11 @@
 // $Id$
 
-The YP module provides a Drupal-based Icecast YP directory, both 
-the CGI script to receive YP posts from Icecast servers and a 
+The Icecast YP directory listing specification allows an Icecast server 
+to update a central directory with information about its available 
+public streams.
+
+The YP module provides a Drupal-based Icecast YP directory, including 
+both the CGI script to receive YP posts from Icecast servers and a 
 sortable directory display page.
 
 After installing the module, you can submit your Icecast stream(s) 
