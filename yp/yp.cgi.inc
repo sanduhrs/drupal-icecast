@@ -61,7 +61,7 @@ class YPCGIAdd extends YPCGI {
       $this->listen_url, $this->description, $this->url, ip_address(), time(), $this->channels, $this->samplerate);
     $this->sid = db_last_insert_id('yp_stream', 'sid');
     $this->yp_response = $this->sid ? 1 : 0;
-    $this->yp_message = $this->response ? 'Added' : 'Error';
+    $this->yp_message = $this->yp_response ? 'Added' : 'Error';
   }
 
   function response() {
