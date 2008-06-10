@@ -28,6 +28,7 @@ class YPCGI {
   }
 
   function receive() {
+    $this->last_touch = time();
     foreach ($this->map as $key => $variables) {
       $this->$key = '';
       foreach ($variables as $variable) {
@@ -54,12 +55,10 @@ class YPCGIAdd extends YPCGI {
     'url' => array('url'),
   );
 
-  function process() { 
+  function process() {
+    $this->listing_ip = ip_address();
     db_query("DELETE FROM {yp_stream} WHERE listing_ip = '%s' AND listen_url = '%s'", ip_address(), $this->listen_url);
-    db_query("INSERT INTO {yp_stream} (server_name, server_type, genre, bitrate, listen_url, description, url, listing_ip, last_touch, channels, samplerate) 
-      VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d, '%s', '%s')", $this->server_name, $this->server_type, $this->genre, $this->bitrate, 
-      $this->listen_url, $this->description, $this->url, ip_address(), time(), $this->channels, $this->samplerate);
-    $this->sid = db_last_insert_id('yp_stream', 'sid');
+    drupal_write_record('yp_stream', $this);
     $this->yp_response = $this->sid ? 1 : 0;
     $this->yp_message = $this->yp_response ? 'Added' : 'Error';
   }
@@ -84,8 +83,7 @@ class YPCGITouch extends YPCGI {
   );
 
   function process() { 
-    db_query("UPDATE {yp_stream} SET listeners = %d, max_listeners = %d, server_subtype = '%s', current_song = '%s', last_touch = %d WHERE sid = %d",
-      $this->listeners, $this->max_listeners, $this->server_subtype, $this->current_song, time(), $this->sid);
+    drupal_write_record('yp_stream', $this, 'sid');
     $this->yp_response = db_affected_rows() ? 1 : 0;
     $this->yp_message = $this->yp_response ? 'Touched' : 'SID not found';
   }
