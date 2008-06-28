@@ -1,0 +1,11 @@
+<?php
+// $Id$
+
+/**
+ * Implementation of hook_cron().
+ */
+function yplog_cron() {
+  // In the event that multiple streams have the same listen URL, they will be
+  // summed together.
+  db_query("INSERT INTO {yp_log} (listen_url, listeners, timestamp) SELECT listen_url, SUM(listeners), %d FROM {yp_stream} GROUP BY listen_url", time());
+}

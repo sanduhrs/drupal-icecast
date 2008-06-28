@@ -1,0 +1,6 @@
+; $Id$
+name = Icecast YP log
+description = Logs snapshots of stream listener counts.
+core = 6.x
+package = Icecast
+dependencies[] = yp
