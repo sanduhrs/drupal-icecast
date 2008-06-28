@@ -66,3 +66,10 @@ function yp_theme() {
     ),
   );
 }
+
+/**
+ * Cleanup stale YP entries (not touched within past five minutes).
+ */
+function yp_cron() {
+  db_query("DELETE FROM {yp_stream} WHERE %d - last_touch > %d", time(), 300);
+}

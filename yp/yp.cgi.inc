@@ -57,7 +57,6 @@ class YPCGIAdd extends YPCGI {
 
   function process() {
     $this->listing_ip = ip_address();
-    db_query("DELETE FROM {yp_stream} WHERE listing_ip = '%s' AND listen_url = '%s'", $this->listing_ip, $this->listen_url);
     drupal_write_record('yp_stream', $this);
     $this->yp_response = $this->sid ? 1 : 0;
     $this->yp_message = $this->yp_response ? 'Added' : 'Error';
@@ -68,7 +67,6 @@ class YPCGIAdd extends YPCGI {
     drupal_set_header('TouchFreq: 200');
     drupal_set_header("YPMessage: $this->yp_message");
     drupal_set_header("YPResponse: $this->yp_response");
-    db_query("DELETE FROM {yp_stream} WHERE %d - last_touch > 300", time());
   }
 }
 
