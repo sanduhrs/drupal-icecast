@@ -25,6 +25,8 @@ class YPCGI {
     $this->receive();
     $this->process();
     $this->response();
+    // Invoke exit hooks.
+    drupal_page_footer();
   }
 
   function receive() {
