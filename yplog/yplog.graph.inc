@@ -50,7 +50,7 @@ function yplog_graph_page($host, $path = '') {
   if (!file_exists($filename) || time() - filemtime($filename) > 600) {
     return yplog_graph($listen_url, $filename);
   }
-  return theme('image', $filename);
+  return theme('yplog_graph', $listen_url, $filename);
 }
 
 /**
@@ -100,7 +100,7 @@ function yplog_graph($listen_url, $filename) {
   $Graph->setPadding(10);
   $Plot->setBorderColor('black');    
   $Graph->done(array('filename' => $filename));
-  return theme('image', $filename);
+  return theme('yplog_graph', $listen_url, $filename);
 }
 
 /**

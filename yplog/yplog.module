@@ -49,3 +49,16 @@ function yplog_cron() {
   // summed together.
   db_query("INSERT INTO {yp_log} (listen_url, listeners, timestamp) SELECT listen_url, SUM(listeners), %d FROM {yp_stream} GROUP BY listen_url", time());
 }
+
+/**
+ * Implementation of hook_theme().
+ */
+function yplog_theme() {
+  return array(
+    'yplog_graph' => array(
+      'arguments' => array('listen_url' => '', 'filename' => ''),
+      'file' => 'yplog.theme.inc',
+      'template' => 'yplog-graph',
+    ),
+  );
+}
