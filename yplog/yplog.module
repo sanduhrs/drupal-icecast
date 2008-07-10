@@ -6,16 +6,16 @@
  */
 function yplog_menu() {
   $items['yp/log'] = array(
-    'title' => 'Logs',
-    'description' => 'Index of available stream log graphs.',
+    'title' => 'Reports',
+    'description' => 'Index of available stream graphs.',
     'page callback' => 'yplog_graph_index',
     'access arguments' => array('access YP log'),
     'file' => 'yplog.graph.inc',
     'type' => MENU_LOCAL_TASK,
   );
   $items['yp/log/%'] = array(
-    'title' => 'Log',
-    'description' => 'Stream log graph.',
+    'title' => 'Stream graph',
+    'description' => 'Stream listenership graph.',
     'page callback' => 'yplog_graph_page',
     'page arguments' => array(2, 3),
     'access arguments' => array('access YP log'),

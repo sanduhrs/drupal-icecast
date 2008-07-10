@@ -93,7 +93,7 @@ $handler->override_option('style_plugin', 'table');
 $handler->override_option('style_options', array(
   'grouping' => '',
   'override' => 1,
-  'sticky' => 0,
+  'sticky' => 1,
   'order' => 'desc',
   'columns' => array(
     'server_name' => 'server_name',
