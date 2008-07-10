@@ -53,6 +53,7 @@ class YPCGIAdd extends YPCGI {
     'listen_url' => array('listenurl'),
     'description' => array('desc'),
     'url' => array('url'),
+    'cluster_password' => array('cpswd'),
   );
 
   function process() {

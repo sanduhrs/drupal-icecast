@@ -6,22 +6,6 @@
  */
 function yp_menu() {
   $items = array();
-  $items['yp'] = array(
-    'title' => 'Stream directory',
-    'description' => 'Icecast stream directory.',
-    'page callback' => 'yp_dir',
-    'access arguments' => array('access content'),
-    'file' => 'yp.dir.inc',
-    'type' => MENU_SUGGESTED_ITEM,
-  );
-  $items['yp/dir'] = array(
-    'title' => 'Directory',
-    'description' => 'Icecast stream directory.',
-    'page callback' => 'yp_dir',
-    'access arguments' => array('access content'),
-    'type' => MENU_DEFAULT_LOCAL_TASK,
-    'file' => 'yp.dir.inc',
-  );
   $items['yp/cgi'] = array(
     'page callback' => 'yp_cgi',
     'access arguments' => array('access content'),
@@ -37,42 +21,6 @@ function yp_menu() {
     'file' => 'yp.admin.inc',
   );
   return $items;
-}
-
-/**
- * Implementation of hook_block().
- */
-function yp_block($op = 'list', $delta = 0, $edit = array()) {
-  if ($op == 'list') {
-    $blocks[0] = array(
-      'info' => t('YP directory'),
-      'cache' => BLOCK_NO_CACHE,
-    );
-    return $blocks;
-  }
-  else if ($op == 'view') {
-    switch($delta) {
-      case 0:
-        $block = array(
-          'subject' => t('Live radio directory'),
-          'content' => theme('yp_dir'),
-        );
-        break;
-    }
-    return $block;
-  }
-}
-
-/**
- * Implementation of hook_theme().
- */
-function yp_theme() {
-  return array(
-    'yp_dir' => array(
-      'arguments' => array(),
-      'file' => 'yp.dir.inc',
-    ),
-  );
 }
 
 /**
