@@ -42,7 +42,7 @@ function yplog_graph_index() {
 function yplog_graph_page($host, $path = '') {
   $listen_url = 'http://'. $host .'/'. $path;
   drupal_set_title(check_plain($listen_url));
-  drupal_set_breadcrumb(array(l(t('Home'), NULL), l(t('Stream directory'), 'yp'), l(t('Logs'), 'yp/log')));
+  drupal_set_breadcrumb(array(l(t('Home'), NULL), l(t('Stream directory'), 'yp'), l(t('Reports'), 'yp/log')));
   $directory = file_create_path('yplog');
   file_check_directory($directory, FILE_CREATE_DIRECTORY);
   $filename = $directory .'/'. md5($listen_url) .'.png';
