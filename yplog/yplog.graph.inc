@@ -28,7 +28,7 @@ function yplog_graph_index() {
     $rows[$key][3] = round(100 * ($rows[$key][3] / $max_touches), 2) .'%';
   }
   if (empty($rows)) {
-    $rows[] = array('data' => t('No stream data found.'), 'colspan' => 4);
+    $rows[] = array(array('data' => t('No stream data found.'), 'colspan' => 4));
   }
   return(
     theme('table', $header, $rows, array(), t('Listing all streams seen in the past seven days.'))
