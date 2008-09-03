@@ -29,3 +29,10 @@ function yp_menu() {
 function yp_cron() {
   db_query("DELETE FROM {yp_stream} WHERE %d - last_touch > %d", time(), 300);
 }
+
+/**
+ * Implementation of hook_views_api().
+ */
+function yp_views_api() {
+  return array('api' => 2);
+}
