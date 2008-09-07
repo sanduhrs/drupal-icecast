@@ -1,5 +1,6 @@
 <?php
 // $Id$
+
 /**
  * @file
  * Provide views data and handlers for yp.module.
@@ -37,63 +38,20 @@ function yp_views_data() {
 }
 
 /**
- * Render stream URL as a link.
+ * Implementation of hook_views_handlers().
  */
-class views_handler_field_yp_server_name extends views_handler_field {
-  function construct() {
-    parent::construct();
-    $this->additional_fields['url'] = 'url';
-  }
-
-  function render($values) {
-    return l($values->{$this->field_alias}, $values->{$this->aliases['url']});
-  }
-}
-
-/**
- * Render "unknown" current song as empty string.
- */
-class views_handler_field_yp_current_song extends views_handler_field {
-  function render($values) {
-    $value = $values->{$this->field_alias};
-    $value = ($value == 'unknown - unknown') ? '' : $value;
-    return check_plain($value);
-  }
-}
-
-/**
- * Render listen URL as a .M3U link.
- */
-class views_handler_field_yp_listen_url extends views_handler_field {
-  function render($values) {
-    $value = $values->{$this->field_alias} .'.m3u';
-    return l(theme('image', drupal_get_path('module', 'yp') .'/listen.png', t('Listen'), t('Listen')), $value, array('html' => TRUE)) . l(t('Listen'), $value);
-  }
-}
-
-/**
- * Render stream type as an abbreviation.
- */
-class views_handler_field_yp_server_type extends views_handler_field {
-  function render($values) {
-    $value = $values->{$this->field_alias};
-    if ($value == 'application/ogg' || $value == 'Ogg Vorbis') {
-      $value = 'Ogg';
-    }
-    if ($value == 'audio/mpeg' || $value == 'MP3 audio' || $value == 'application/mp3') {
-      $value = 'MP3';
-    }
-    return check_plain($value);
-  }
-}
-
-/**
- * Render stream bitrate with a "k" for kbps.
- */
-class views_handler_field_yp_bitrate extends views_handler_field {
-  function render($values) {
-    $value = $values->{$this->field_alias};
-    $value = $value ? $value .'k' : $value;
-    return check_plain($value);
-  }
+function yp_views_handlers() {
+  $common = array(
+    'parent' => 'views_handler_field',
+    'file' => 'yp.handlers.inc',
+  );
+  return array(
+    'handlers' => array(
+      'views_handler_field_yp_server_name' => $common,
+      'views_handler_field_yp_current_song' => $common,
+      'views_handler_field_yp_listen_url' => $common,
+      'views_handler_field_yp_server_type' => $common,
+      'views_handler_field_yp_bitrate' => $common,
+    ),
+  );
 }
