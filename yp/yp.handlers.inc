@@ -7,7 +7,7 @@
 class views_handler_field_yp_bitrate extends views_handler_field {
   function render($values) {
     $value = $values->{$this->field_alias};
-    $value = $value ? $value .'k' : $value;
+    $value = is_numeric($value) ? $value . 'k' : str_replace('Quality ', '', $value);
     return check_plain($value);
   }
 }
@@ -53,11 +53,19 @@ class views_handler_field_yp_server_name extends views_handler_field {
 class views_handler_field_yp_server_type extends views_handler_field {
   function render($values) {
     $value = $values->{$this->field_alias};
-    if ($value == 'application/ogg' || $value == 'Ogg Vorbis') {
-      $value = 'Ogg';
-    }
-    if ($value == 'audio/mpeg' || $value == 'MP3 audio' || $value == 'application/mp3') {
-      $value = 'MP3';
+    switch ($value) {
+      case 'application/ogg':
+      case 'Ogg Vorbis':
+        $value = 'Ogg';
+        break;
+      case 'audio/mpeg':
+      case 'MP3 audio':
+      case 'application/mp3':
+        $value = 'MP3';
+        break;
+      case 'audio/aacp':
+        $value = 'AAC+';
+        break;
     }
     return check_plain($value);
   }
