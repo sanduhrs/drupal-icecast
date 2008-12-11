@@ -7,8 +7,9 @@
 class views_handler_field_yp_bitrate extends views_handler_field {
   function render($values) {
     $value = $values->{$this->field_alias};
-    $value = is_numeric($value) ? $value . 'k' : str_replace('Quality ', '', $value);
-    return check_plain($value);
+    $value = $value ? $value . 'k' : t('VBR');
+    // Integer field does not require check_plain().
+    return $value;
   }
 }
 
