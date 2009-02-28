@@ -113,6 +113,6 @@ function yplog_graph_date($timestamp) {
 /**
  * Formats the timezone for X axis.
  */
-function yplog_graph_timezone($timestamp) {
+function yplog_graph_timezone() {
   return variable_get('yplog_gmdate', 1) ? t('GMT') : t('@timezone hours', array('@timezone' => format_date(time(), 'custom', 'O')));
 }
