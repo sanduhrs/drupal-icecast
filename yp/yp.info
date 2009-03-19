@@ -3,3 +3,4 @@ name = Icecast YP
 description = Icecast YP directory
 core = 6.x
 package = Icecast
+dependencies[] = views
