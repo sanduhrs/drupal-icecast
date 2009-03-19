@@ -58,7 +58,7 @@ function yplog_graph_page($host, $path = '') {
  */
 function yplog_graph($listen_url, $filename) {
   $result = db_query("SELECT timestamp, listeners, listen_url FROM {yp_log} WHERE listen_url = '%s' AND timestamp > %d", $listen_url, time() - 604800);
-  require_once(variable_get('yplog_pear', '') . 'Image/Graph.php');
+  require_once('Image/Graph.php');
   $Dataset =& Image_Graph::factory('dataset');
   $max_listeners = 0;
   while ($log = db_fetch_object($result)) {
@@ -69,7 +69,7 @@ function yplog_graph($listen_url, $filename) {
     return MENU_NOT_FOUND;
   }
   $Dataset->setName(t('Date (@timezone)', array('@timezone' => yplog_graph_timezone())));
-  require_once(variable_get('yplog_pear', '') . 'Image/Canvas.php');
+  require_once('Image/Canvas.php');
   $Canvas =& Image_Canvas::factory('png', array('width' => 640, 'height' => 320, 'antialias' => 'native'));
   $Graph =& Image_Graph::factory('graph', $Canvas); 
   $Font =& $Graph->addNew('font', variable_get('yplog_font', '/usr/local/lib/X11/fonts/webfonts/verdana.ttf'));
