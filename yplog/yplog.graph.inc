@@ -13,13 +13,13 @@ function yplog_graph_index() {
     array('data' => t('Average listeners'), 'field' => 'average'),
     array('data' => t('Relative uptime'), 'field' => 'touches'),
   );
-  $query = db_select('yp_log')
-    ->addField('listen_url')
-    ->addExpression('MAX(listeners)', 'maximum');
-    ->addExpression('ROUND(AVG(listeners))', 'average');
-    ->addExpression('COUNT(*)', 'touches');
-    ->condition('timestamp', REQUEST_TIME - 604800, '>');
-    ->groupBy('listen_url');
+  $query = db_select('yp_log');
+  $query->addField('listen_url');
+  $query->addExpression('MAX(listeners)', 'maximum');
+  $query->addExpression('ROUND(AVG(listeners))', 'average');
+  $query->addExpression('COUNT(*)', 'touches');
+  $query->condition('timestamp', REQUEST_TIME - 604800, '>');
+  $query->groupBy('listen_url');
   $query = $query
     ->extend('TableSort')
     ->orderByHeader($header);
