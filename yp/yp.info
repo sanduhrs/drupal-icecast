@@ -1,0 +1,13 @@
+; $Id$
+name = Icecast YP
+description = Icecast YP directory
+core = 7.x
+package = Icecast
+dependencies[] = views
+files[] = yp.admin.inc
+files[] = yp.cgi.inc
+files[] = yp.handlers.inc
+files[] = yp.views.inc
+files[] = yp.views_default.inc
+files[] = yp.install
+files[] = yp.module
