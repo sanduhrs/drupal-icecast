@@ -56,7 +56,7 @@ function yplog_cron() {
 function yplog_theme() {
   return array(
     'yplog_graph' => array(
-      'arguments' => array('listen_url' => '', 'filename' => ''),
+      'variables' => array('listen_url' => '', 'filename' => ''),
       'file' => 'yplog.theme.inc',
       'template' => 'yplog-graph',
     ),

@@ -41,7 +41,7 @@ function yplog_graph_index() {
     $rows[] = array(array('data' => t('No stream data found.'), 'colspan' => 4));
   }
   return(
-    theme('table', $header, $rows, array(), t('Listing all streams seen in the past seven days.'))
+    theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array(), 'caption' => t('Listing all streams seen in the past seven days.')))
     . t('Uptime is relative to the stream with the highest uptime as seen by this YP server. Therefore "100%" does not necessarily indicate the stream was up 100% of the time. The log takes only periodic snapshots of directory data; therefore it may have missed the actual maximum listenership of a stream.')
   );
 }
@@ -60,7 +60,7 @@ function yplog_graph_page($host, $path = '') {
   if (!file_exists($filename) || REQUEST_TIME - filemtime($filename) > 600) {
     return yplog_graph($listen_url, $filename);
   }
-  return theme('yplog_graph', $listen_url, $filename);
+  return theme('yplog_graph', array('listen_url' => $listen_url, 'filename' => $filename));
 }
 
 /**
@@ -110,7 +110,7 @@ function yplog_graph($listen_url, $filename) {
   $Graph->setPadding(10);
   $Plot->setBorderColor('black');    
   $Graph->done(array('filename' => $filename));
-  return theme('yplog_graph', $listen_url, $filename);
+  return theme('yplog_graph', array('listen_url' => $listen_url, 'filename' => $filename));
 }
 
 /**
