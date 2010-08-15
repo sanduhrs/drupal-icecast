@@ -32,12 +32,8 @@ function yp_schema() {
   return $schema;
 }
 
-function yp_install() {
-  drupal_install_schema('yp');
-}
-
 function yp_uninstall() {
-  drupal_uninstall_schema('yp');
+  variable_del('yp_debug');
 }
 
 /**
