@@ -14,7 +14,7 @@ function yplog_graph_index() {
     array('data' => t('Relative uptime'), 'field' => 'touches'),
   );
   $query = db_select('yp_log');
-  $query->addField('listen_url');
+  $query->addField('yp_log', 'listen_url');
   $query->addExpression('MAX(listeners)', 'maximum');
   $query->addExpression('ROUND(AVG(listeners))', 'average');
   $query->addExpression('COUNT(*)', 'touches');
@@ -53,8 +53,8 @@ function yplog_graph_page($host, $path = '') {
   $listen_url = 'http://' . $host . '/' . $path;
   drupal_set_title($listen_url);
   drupal_set_breadcrumb(array(l(t('Home'), NULL), l(t('Stream directory'), 'yp'), l(t('Reports'), 'yp/log')));
-  $directory = file_create_path('yplog');
-  file_check_directory($directory, FILE_CREATE_DIRECTORY);
+  $directory = file_directory_path() . '/yplog';
+  file_prepare_directory($directory, FILE_CREATE_DIRECTORY);
   $filename = $directory . '/' . md5($listen_url) . '.png';
   // If image is stale or not found, generate new image.
   if (!file_exists($filename) || REQUEST_TIME - filemtime($filename) > 600) {
@@ -128,5 +128,5 @@ function yplog_graph_date($timestamp) {
 function yplog_graph_timezone() {
   $date = date_create('@' . REQUEST_TIME);
   $date->setTimezone(timezone_open(variable_get('date_default_timezone', 'UTC')));
-  return $date->format('T (O)');
+  return $date->format('T O');
 }

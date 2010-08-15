@@ -30,7 +30,7 @@ class views_handler_field_yp_current_song extends views_handler_field {
 class views_handler_field_yp_listen_url extends views_handler_field {
   function render($values) {
     $value = $values->{$this->field_alias} . '.m3u';
-    return l(theme('image', array('path' => drupal_get_path('module', 'yp') . '/listen.png', 'alt' => t('Listen'), 'title' => t('Listen'))), $value, array('html' => TRUE)) . l(t('Listen'), $value);
+    return l(theme('image', array('path' => drupal_get_path('module', 'yp') . '/listen.png', 'alt' => t('Listen'), 'title' => t('Listen'), 'attributes' => array('width' => 16, 'height' => 16), 'getsize' => FALSE)), $value, array('html' => TRUE)) . l(t('Listen'), $value);
   }
 }
 
