@@ -21,7 +21,6 @@ function yplog_menu() {
     'access arguments' => array('access YP log'),
     'file' => 'yplog.graph.inc',
     'parent' => 'yp/log',
-    'type' => MENU_CALLBACK,
   );
   $items['admin/config/services/yplog'] = array(
     'title' => 'YP log',
