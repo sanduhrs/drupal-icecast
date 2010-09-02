@@ -53,18 +53,18 @@ function yplog_graph_page($host, $path = '') {
   $listen_url = 'http://' . $host . '/' . $path;
   drupal_set_title($listen_url);
   drupal_set_breadcrumb(array(l(t('Home'), NULL), l(t('Stream directory'), 'yp'), l(t('Reports'), 'yp/log')));
-  $directory = file_default_scheme() . '://yplog';
+  $directory = 'public://yplog';
   file_prepare_directory($directory, FILE_CREATE_DIRECTORY);
   $filename = $directory . '/' . md5($listen_url) . '.png';
   // If image is stale or not found, generate new image.
-  if (!file_exists($filename) || REQUEST_TIME - filemtime($filename) > 600) {
-    return yplog_graph($listen_url, $filename);
+  if (!file_exists($filename) || REQUEST_TIME - filemtime($filename) > 900) {
+    yplog_graph($listen_url, $filename);
   }
   return theme('yplog_graph', array('listen_url' => $listen_url, 'filename' => $filename));
 }
 
 /**
- * Generates graph image and returns the themed image tag.
+ * Generates graph image.
  */
 function yplog_graph($listen_url, $filename) {
   $result = db_query('SELECT timestamp, listeners, listen_url FROM {yp_log} WHERE listen_url = :listen_url AND timestamp > :timestamp', array(':listen_url' => $listen_url, ':timestamp' => REQUEST_TIME - 604800));
@@ -110,7 +110,6 @@ function yplog_graph($listen_url, $filename) {
   $Graph->setPadding(10);
   $Plot->setBorderColor('black');    
   $Graph->done(array('filename' => drupal_realpath($filename)));
-  return theme('yplog_graph', array('listen_url' => $listen_url, 'filename' => $filename));
 }
 
 /**
