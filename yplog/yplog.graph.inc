@@ -53,7 +53,7 @@ function yplog_graph_page($host, $path = '') {
   $listen_url = 'http://' . $host . '/' . $path;
   drupal_set_title($listen_url);
   drupal_set_breadcrumb(array(l(t('Home'), NULL), l(t('Stream directory'), 'yp'), l(t('Reports'), 'yp/log')));
-  $directory = file_directory_path() . '/yplog';
+  $directory = file_default_scheme() . '://yplog';
   file_prepare_directory($directory, FILE_CREATE_DIRECTORY);
   $filename = $directory . '/' . md5($listen_url) . '.png';
   // If image is stale or not found, generate new image.
@@ -109,7 +109,7 @@ function yplog_graph($listen_url, $filename) {
   $Graph->setBorderColor('black');
   $Graph->setPadding(10);
   $Plot->setBorderColor('black');    
-  $Graph->done(array('filename' => $filename));
+  $Graph->done(array('filename' => drupal_realpath($filename)));
   return theme('yplog_graph', array('listen_url' => $listen_url, 'filename' => $filename));
 }
 
