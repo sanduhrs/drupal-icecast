@@ -45,6 +45,7 @@ function yplog_perm() {
  * Implementation of hook_cron().
  */
 function yplog_cron() {
+  db_query('DELETE FROM {yp_log} WHERE timestamp < %d', time() - (60 * 60 * 24 * 30));
   // In the event that multiple streams have the same listen URL, they will be
   // summed together.
   db_query("INSERT INTO {yp_log} (listen_url, listeners, timestamp) SELECT listen_url, SUM(listeners), %d FROM {yp_stream} GROUP BY listen_url", time());
