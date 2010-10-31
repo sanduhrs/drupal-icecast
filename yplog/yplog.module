@@ -46,6 +46,7 @@ function yplog_perm() {
 function yplog_cron() {
   // In the event that multiple streams have the same listen URL, they will be
   // summed together.
+  db_delete('yp_log')->condition('timestamp', REQUEST_TIME - (60 * 60 * 24 * 30), '<')->execute();
   db_query('INSERT INTO {yp_log} (listen_url, listeners, timestamp) SELECT listen_url, SUM(listeners), :timestamp FROM {yp_stream} GROUP BY listen_url', array(':timestamp' => REQUEST_TIME));
 }
 
