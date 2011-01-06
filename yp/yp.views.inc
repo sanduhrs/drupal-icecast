@@ -16,7 +16,7 @@ function yp_views_data() {
     'title' => t('Icecast YP'),
     'help' => t('Icecast streams listed by the Icecast YP directory module.'),
   );
-  $schema = drupal_get_schema('yp_stream');
+  $schema = drupal_get_schema_unprocessed('yp', 'yp_stream');
   foreach ($schema['fields'] as $key => $field) {
     $data['yp_stream'][$key] = array(
       'title' => $field['description'],
