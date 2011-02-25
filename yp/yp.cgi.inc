@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 function yp_cgi() {
   if (variable_get('yp_debug', 0)) {

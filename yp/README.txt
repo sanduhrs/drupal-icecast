@@ -1,4 +1,3 @@
-// $Id$
 
 The Icecast YP directory listing specification allows an Icecast server 
 to update a central directory with information about its available 

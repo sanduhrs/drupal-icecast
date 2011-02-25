@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 function yp_schema() {
   $schema['yp_stream'] = array(

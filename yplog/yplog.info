@@ -1,4 +1,3 @@
-; $Id$
 name = Icecast YP log
 description = Logs snapshots of stream listener counts.
 core = 7.x

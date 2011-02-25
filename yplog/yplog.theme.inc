@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 function template_preprocess_yplog_graph(&$variables) {
   $title = t('Listenership graph for @listen_url', array('@listen_url' => $variables['listen_url']));
