@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 /**
  * Generates an index of available logs, limited to the past week.

@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 /**
  * Render stream bitrate with a "k" for kbps.

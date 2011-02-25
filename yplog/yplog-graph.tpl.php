@@ -1,5 +1,4 @@
 <?php
-// $Id$
 ?>
 
 <div class="yplog-graph">
