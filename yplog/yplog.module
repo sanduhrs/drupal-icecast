@@ -5,7 +5,7 @@
  */
 function yplog_menu() {
   $items['yp/log'] = array(
-    'title' => 'Reports',
+    'title' => 'Statistics',
     'description' => 'Index of available stream graphs.',
     'page callback' => 'yplog_graph_index',
     'access arguments' => array('access YP log'),
