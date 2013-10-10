@@ -2,12 +2,15 @@
 
 function yp_cgi() {
   if (variable_get('yp_debug', 0)) {
-    watchdog('yp', check_plain(print_r($_POST, TRUE)), NULL, WATCHDOG_DEBUG);
+    watchdog('yp', check_plain(print_r($_REQUEST, TRUE)), NULL, WATCHDOG_DEBUG);
   }
-  $action = isset($_POST['action']) ? trim($_POST['action']) : '';
+  $action = isset($_REQUEST['action']) ? trim($_REQUEST['action']) : '';
   $actions = array('add' => 'YPCGIAdd', 'touch' => 'YPCGITouch', 'remove' => 'YPCGIRemove');
   if (isset($actions[$action])) {
     new $actions[$action];
+  }
+  else {
+    return MENU_ACCESS_DENIED;
   }
 }
 
@@ -18,8 +21,8 @@ class YPCGI {
     foreach ($this->map as $key => $variables) {
       $this->$key = '';
       foreach ($variables as $variable) {
-        if (isset($_POST[$variable])) {
-          $this->$key = trim($_POST[$variable]);
+        if (isset($_REQUEST[$variable])) {
+          $this->$key = trim($_REQUEST[$variable]);
         }
       }
     }
@@ -64,7 +67,7 @@ class YPCGITouch extends YPCGI {
     'current_song' => array('st'),
   );
 
-  function execute() { 
+  function execute() {
     $this->yp_response = drupal_write_record('yp_stream', $this, 'sid') ? 1 : 0;
     $this->yp_message = $this->yp_response ? 'Touched' : 'SID not found';
   }
@@ -76,7 +79,7 @@ class YPCGIRemove extends YPCGI {
     'sid' => array('sid'),
   );
 
-  function execute() { 
+  function execute() {
     db_delete('yp_stream')->condition('sid', $this->sid)->execute();
     $this->yp_response = 1;
     $this->yp_message = 'Removed';
